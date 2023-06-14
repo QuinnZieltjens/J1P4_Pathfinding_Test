@@ -14,6 +14,8 @@ internal abstract class Entity : GameBehaviour
     /// </summary>
     public Entity(World _world, Position _position)
     {
+        Color = ConsoleColor.Gray;
+
         //set the starting variables
         World = _world;
         Position = _position;

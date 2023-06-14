@@ -18,7 +18,7 @@ internal class Game : GameBehaviour
         WorldBuilder worldBuilder = JsonConvert.DeserializeObject<WorldBuilder>(jsonData) ?? throw new Exception("incorrect json format!");
 
         world = worldBuilder.Build();
-        entities = new List<Entity>() { };
+        entities = new List<Entity>() { new ()};
         display = new Display(world, entities);
     }
 }
