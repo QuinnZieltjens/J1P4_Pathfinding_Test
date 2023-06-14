@@ -19,6 +19,10 @@ internal abstract class Entity
         Position = _position;
     }
 
+    /// <summary>
+    /// sets <see cref="Position"/> to that plus <paramref name="_direction"/>,<br/>
+    /// if this path encounters a wall the position is set to the space before
+    /// </summary>
     protected void Move(Position _direction)
     {
         float m;
@@ -52,6 +56,7 @@ internal abstract class Entity
             endPos = new Position(x, y);
         }
 
+        //set the position to the final position
         Position = endPos;
     }
 }
