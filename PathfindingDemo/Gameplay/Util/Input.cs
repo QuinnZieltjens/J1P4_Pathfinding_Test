@@ -1,17 +1,17 @@
-﻿namespace PathfindingDemo.Gameplay.Util;
+﻿using System.Runtime.InteropServices;
 
-internal class Input
+namespace PathfindingDemo.Gameplay.Util;
+
+internal static class Input
 {
+    // Import the GetAsyncKeyState function from user32.dll
+    [DllImport("user32.dll")]
+    public static extern short GetAsyncKeyState(int _vKey);
+
+    private static ConsoleKey? lastDetectedKey = null;
+
     public static bool KeyPressed(ConsoleKey _key)
     {
-        //if no key is available, return false
-        if (Console.KeyAvailable == false)
-            return false;
-        
-        //gets the key info from the pressed key
-        ConsoleKeyInfo keyInfo = Console.ReadKey(true);
-        
-        //return if keyInfo.Key is equal to _key
-        return keyInfo.Key == _key;
+        return (GetAsyncKeyState((int)_key) & 0x8000) != 0;
     }
 }
