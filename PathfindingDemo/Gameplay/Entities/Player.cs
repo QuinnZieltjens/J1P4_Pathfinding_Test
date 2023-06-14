@@ -5,7 +5,9 @@ namespace PathfindingDemo.Gameplay.Entities;
 internal class Player : Entity
 {
     public Player(World _world) : base(_world, new Position(0, 0))
-    { }
+    {
+        Color = ConsoleColor.Green;
+    }
 
     protected override void Update()
     {
