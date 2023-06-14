@@ -1,5 +1,6 @@
 ﻿namespace PathfindingDemo.Gameplay.Util;
-internal class Position
+
+internal struct Position
 {
     public int X { get; set; }
     public int Y { get; set; }
