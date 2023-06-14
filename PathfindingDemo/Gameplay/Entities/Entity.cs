@@ -43,16 +43,20 @@ internal abstract class Entity : GameBehaviour
         x2 = newPos.X;
         y2 = newPos.Y;
 
-        //get m (slope)
-        m = (y2 - y1) / (x2 - x1);
+        //if x1 and x2 are equal (preventing a divide by zero error)
+        if (x1 == x2)
+            m = y1 - y2;
+
+        else //otherwise get m (slope)
+            m = (y2 - y1) / (x2 - x1);
 
         //loop through x
-        for (int x = x1; x < x2; x++)
+        for (int x = x1 < x2 ? x1 : x2; x < (x1 > x2 ? x1 : x2); x++)
         {
             int y = (int)Math.Floor(m * (x - x1));
 
             //if (x, y) is a wall
-            if (World.IsWall((x, y)))
+            if (World.IsWall(new Position(x, y)))
                 break; //break the loop as we have our answer
 
             endPos = new Position(x, y);

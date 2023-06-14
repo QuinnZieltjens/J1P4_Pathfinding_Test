@@ -36,7 +36,6 @@ internal class Position
     public static Position Right => new(1, 0);
 
 
-    public static implicit operator Position((int x, int y) _pos) => new(_pos.x, _pos.y);
     public static Position operator -(Position _a, Position _b) => new(_a.X - _b.X, _a.Y - _b.Y);
     public static Position operator +(Position _a, Position _b) => new(_a.X + _b.X, _a.Y + _b.Y);
     public static Position operator *(Position _a, Position _b) => new(_a.X * _b.X, _a.Y * _b.Y);
