@@ -3,7 +3,7 @@ using PathfindingDemo.Gameplay.Util;
 
 namespace PathfindingDemo.Gameplay.Entities;
 
-internal abstract class Entity
+internal abstract class Entity : GameBehaviour
 {
     public Position Position { get; set; }
     public ConsoleColor Color { get; protected init; }
