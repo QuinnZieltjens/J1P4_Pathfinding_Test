@@ -1,4 +1,5 @@
 ﻿using PathfindingDemo.Gameplay.Enviroment;
+using System.Diagnostics;
 
 namespace PathfindingDemo.Gameplay.Util.Physics;
 
@@ -66,6 +67,8 @@ internal static partial class Physics
                     int x = (int)Math.Round(Calculate(y));
                     Position currentPos = new(x, y);
 
+                    Display.DebugMark(x, y, ConsoleColor.Red);
+
                     if (world.IsWall(currentPos))
                         return new RaycastHit(true, endPos);
 
@@ -78,6 +81,8 @@ internal static partial class Physics
                 {
                     int y = (int)Math.Round(Calculate(x));
                     Position currentPos = new(x, y);
+
+                    Display.DebugMark(x, y, ConsoleColor.Red);
 
                     if (world.IsWall(currentPos))
                         return new RaycastHit(true, endPos);

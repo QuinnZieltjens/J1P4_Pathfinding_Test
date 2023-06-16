@@ -2,14 +2,15 @@
 
 internal struct Position
 {
-    public int X { get; set; }
-    public int Y { get; set; }
+    public int X { get; }
+    public int Y { get; }
 
     public Position(int _x, int _y)
     {
         X = _x;
         Y = _y;
     }
+
 
     /// <summary>
     /// gives a position with the value <c>0, 0</c>

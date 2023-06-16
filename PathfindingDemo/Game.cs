@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json;
 using PathfindingDemo.Gameplay.Entities;
 using PathfindingDemo.Gameplay.Enviroment;
+using PathfindingDemo.Gameplay.Util;
 
 namespace PathfindingDemo;
 
@@ -18,7 +19,13 @@ internal class Game : GameBehaviour
         WorldBuilder worldBuilder = JsonConvert.DeserializeObject<WorldBuilder>(jsonData) ?? throw new Exception("incorrect json format!");
 
         world = worldBuilder.Build();
-        entities = new List<Entity>() { new Player(world) };
+        entities = new List<Entity>();
         display = new Display(world, entities);
+    }
+
+    protected override void Start()
+    {
+        entities.Add(new Player(world, new(4, 3)));
+        entities.Add(new AStar(world, new(0, 0), new(world.SizeX - 1, world.SizeY - 1)));
     }
 }

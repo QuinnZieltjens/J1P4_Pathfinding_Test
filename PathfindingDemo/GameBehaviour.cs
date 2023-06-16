@@ -56,7 +56,7 @@ internal abstract class GameBehaviour
     /// </summary>
     private static void UpdateLoop()
     {
-        const int DelayMilliseconds = 40; // 1000 ÷ 40 = 25fps
+        const int DelayMilliseconds = 500; // 1000 ÷ 40 = 25fps
         DateTime startTime;
         DateTime endTime;
 

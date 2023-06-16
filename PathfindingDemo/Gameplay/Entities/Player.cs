@@ -4,7 +4,7 @@ using PathfindingDemo.Gameplay.Util;
 namespace PathfindingDemo.Gameplay.Entities;
 internal class Player : Entity
 {
-    public Player(World _world) : base(_world, new Position(4, 4))
+    public Player(World _world, Position _pos) : base(_world, _pos)
     {
         Color = ConsoleColor.Green;
     }
