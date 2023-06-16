@@ -49,10 +49,10 @@ internal class World
     public bool IsWall(Position _position)
     {
         if (_position.X < 0 || _position.X >= sizeX)
-            return false;
+            return true;
 
         if (_position.Y < 0 || _position.Y >= sizeY)
-            return false;
+            return true;
 
         return Tiles[_position.X, _position.Y];
     }
