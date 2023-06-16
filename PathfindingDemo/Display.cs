@@ -1,13 +1,14 @@
 ﻿using PathfindingDemo.Gameplay.Entities;
 using PathfindingDemo.Gameplay.Enviroment;
 using PathfindingDemo.Gameplay.Util;
+using System.Diagnostics;
 
 namespace PathfindingDemo;
 
 internal class Display : GameBehaviour
 {
-    private const int offsetX = 5;
-    private const int offsetY = 3;
+    private const int OffsetX = 5;
+    private const int OffsetY = 3;
 
     private readonly World world;
     private readonly List<Entity> entities;
@@ -18,6 +19,18 @@ internal class Display : GameBehaviour
         world = _world;
         entities = _entities;
         drawnEntityPositionCache = new List<Position>();
+    }
+
+    public static void DebugMark(int _x, int _y, ConsoleColor _color = ConsoleColor.DarkGray)
+    {
+        //if the debugger isn't attached, exit method
+        if (Debugger.IsAttached == false)
+            return;
+
+        Console.SetCursorPosition(_x + OffsetX, _y + OffsetY);
+        Console.BackgroundColor = ConsoleColor.Black;
+        Console.ForegroundColor = _color;
+        Console.Write('.');
     }
 
     protected override void Start()
@@ -41,7 +54,7 @@ internal class Display : GameBehaviour
         foreach (Position drawnPosition in drawnEntityPositionCache)
         {
             //set the drawn position to black
-            DrawAt(drawnPosition.X + offsetX, drawnPosition.Y + offsetY, ConsoleColor.Black);
+            DrawAt(drawnPosition.X, drawnPosition.Y, ConsoleColor.Black);
         }
 
         //clear the entity cache
@@ -57,7 +70,7 @@ internal class Display : GameBehaviour
             int posY = entity.Position.Y;
 
             //draw the entities colour at the position
-            DrawAt(posX + offsetX, posY + offsetY, entity.Color);
+            DrawAt(posX, posY, entity.Color);
 
             //cache the position of the drawn entity
             drawnEntityPositionCache.Add(new Position(posX, posY));
@@ -71,14 +84,15 @@ internal class Display : GameBehaviour
             for (int y = -1; y <= world.SizeY; y++)
             {
                 ConsoleColor color = world.IsWall(new Position(x, y)) ? ConsoleColor.White : ConsoleColor.Black;
-                DrawAt(x + offsetX, y + offsetY, color);
+                DrawAt(x, y, color);
             }
         }
     }
 
+
     private static void DrawAt(int _x, int _y, ConsoleColor _color)
     {
-        Console.SetCursorPosition(_x, _y);
+        Console.SetCursorPosition(_x + OffsetX, _y + OffsetY);
         Draw(_color);
     }
 
