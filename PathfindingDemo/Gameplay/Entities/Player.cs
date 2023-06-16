@@ -12,13 +12,13 @@ internal class Player : Entity
     protected override void Update()
     {
         if (Input.GetKeyDown(ConsoleKey.W))
-            Move(Position.Up);
+            Move(Position.Down);
 
         if (Input.GetKeyDown(ConsoleKey.A))
             Move(Position.Left);
 
         if (Input.GetKeyDown(ConsoleKey.S))
-            Move(Position.Down);
+            Move(Position.Up);
 
         if (Input.GetKeyDown(ConsoleKey.D))
             Move(Position.Right);

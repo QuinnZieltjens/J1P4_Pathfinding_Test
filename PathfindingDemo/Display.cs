@@ -6,6 +6,9 @@ namespace PathfindingDemo;
 
 internal class Display : GameBehaviour
 {
+    private const int offsetX = 5;
+    private const int offsetY = 3;
+
     private readonly World world;
     private readonly List<Entity> entities;
     private readonly List<Position> drawnEntityPositionCache;
@@ -38,7 +41,7 @@ internal class Display : GameBehaviour
         foreach (Position drawnPosition in drawnEntityPositionCache)
         {
             //set the drawn position to black
-            DrawAt(drawnPosition.X, drawnPosition.Y, ConsoleColor.Black);
+            DrawAt(drawnPosition.X + offsetX, drawnPosition.Y + offsetY, ConsoleColor.Black);
         }
 
         //clear the entity cache
@@ -54,7 +57,7 @@ internal class Display : GameBehaviour
             int posY = entity.Position.Y;
 
             //draw the entities colour at the position
-            DrawAt(posX, posY, entity.Color);
+            DrawAt(posX + offsetX, posY + offsetY, entity.Color);
 
             //cache the position of the drawn entity
             drawnEntityPositionCache.Add(new Position(posX, posY));
@@ -63,12 +66,12 @@ internal class Display : GameBehaviour
 
     private void DrawWorld()
     {
-        for (int x = 0; x < world.SizeX; x++)
+        for (int x = -1; x <= world.SizeX; x++)
         {
-            for (int y = 0; y < world.SizeY; y++)
+            for (int y = -1; y <= world.SizeY; y++)
             {
                 ConsoleColor color = world.IsWall(new Position(x, y)) ? ConsoleColor.White : ConsoleColor.Black;
-                DrawAt(x, y, color);
+                DrawAt(x + offsetX, y + offsetY, color);
             }
         }
     }
