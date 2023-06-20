@@ -11,6 +11,7 @@ internal class Player : Entity
 
     protected override void Update()
     {
+        //ignore that W = Down and S = Up, Y-axis was stored flipped and I couldn't be bothered to fix it
         if (Input.GetKeyDown(ConsoleKey.W))
             Move(Position.Down);
 

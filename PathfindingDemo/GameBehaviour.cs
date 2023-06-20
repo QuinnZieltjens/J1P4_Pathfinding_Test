@@ -1,88 +1,49 @@
-﻿namespace PathfindingDemo;
+﻿using System.Reflection;
+
+namespace PathfindingDemo;
 
 internal abstract class GameBehaviour
 {
-
-    private static event Action StartEvent;
-    private static event Action UpdateEvent;
-
-    private static Thread UpdateThread { get; }
-
-    private bool gameRunning = false;
-
-
-    static GameBehaviour()
-    {
-        StartEvent += DoNothing;
-        UpdateEvent += DoNothing;
-
-        UpdateThread = new Thread(UpdateLoop);
-    }
-
     public GameBehaviour()
     {
-        StartEvent += Start;
-        UpdateEvent += Update;
-    }
+        //get the task scheduler's instance (if instance == null, throw NullReferenceException)
+        TaskScheduler scheduler = TaskScheduler.Instance ?? throw new NullReferenceException("The TaskScheduler didn't have an instance");
 
-    public static void StartGame(GameBehaviour _game)
-    {
-        if (_game.gameRunning == true)
-            throw new Exception("the game is already running");
+        //get the declaring types of the methods
+        Type startDeclareType = GetMethodDeclaringType(nameof(Start));
+        Type updateDeclare = GetMethodDeclaringType(nameof(Update));
 
-        _game.StartGame();
+
+        //insure that the methods only listen to the event if they haven't been declared by this class
+        if (startDeclareType != typeof(GameBehaviour))
+            scheduler.StartEvent += Start;
+
+        if (updateDeclare != typeof(GameBehaviour))
+            scheduler.UpdateEvent += Update;
     }
 
     /// <summary>
     /// is called before the first frame
     /// </summary>
-    protected virtual void Start() => DoNothing();
-
-    /// <summary>
-    /// is called every frame
-    /// </summary>
-    protected virtual void Update() => DoNothing();
-
-    /// <summary>
-    /// immediately returns
-    /// </summary>
-    private static void DoNothing()
+    protected virtual void Start()
     {
         return;
     }
 
     /// <summary>
-    /// the loop for invoking <see cref="UpdateEvent"/> with a set delay
+    /// is called every frame
     /// </summary>
-    private static void UpdateLoop()
+    protected virtual void Update()
     {
-        const int DelayMilliseconds = 500; // 1000 ÷ 40 = 25fps
-        DateTime startTime;
-        DateTime endTime;
-
-        while (true) //THIS IS NOT THE BEST THING TO DO
-        {
-            startTime = DateTime.Now;
-            UpdateEvent.Invoke();
-            endTime = DateTime.Now;
-
-            int delay = DelayMilliseconds - (endTime - startTime).Milliseconds;
-
-            if (delay > 0)
-                Thread.Sleep(delay);
-        }
+        return;
     }
 
-    /// <summary>
-    /// starts the game
-    /// </summary>
-    private void StartGame()
+    private Type GetMethodDeclaringType(string _methodName)
     {
-        gameRunning = true;
-        StartEvent.Invoke(); //invoke the start event
-        UpdateThread.Start(); //start the update loop
+        Type instanceType = GetType(); //get the type of the current instance
+        MethodInfo? methodInfo = instanceType.GetMethod(_methodName); //get the method with the given methodName
 
-        //sleep indefinitely
-        Thread.Sleep(-1);
+        //return the method's declared type, otherwise return the instance type
+        return methodInfo?.DeclaringType ?? instanceType;
     }
 }
