@@ -1,6 +1,6 @@
 ﻿using System.Runtime.InteropServices;
 
-namespace PathfindingDemo.Gameplay.Util;
+namespace PathfindingDemo.Util;
 
 internal static class Input
 {
@@ -18,7 +18,7 @@ internal static class Input
         if (keypresses.ContainsKey(_key))
         {
             bool timeout;
-            TimeSpan difference = (keypresses[_key] - DateTime.Now);
+            TimeSpan difference = keypresses[_key] - DateTime.Now;
             TimeSpan delay = new(0, 0, 0, 0, InputDelayMilliseconds);
 
             timeout = difference >= delay;

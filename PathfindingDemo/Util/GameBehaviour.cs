@@ -1,6 +1,6 @@
 ﻿using System.Reflection;
 
-namespace PathfindingDemo;
+namespace PathfindingDemo.Util;
 
 internal abstract class GameBehaviour
 {

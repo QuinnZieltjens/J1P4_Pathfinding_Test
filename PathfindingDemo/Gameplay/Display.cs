@@ -1,9 +1,10 @@
 ﻿using PathfindingDemo.Gameplay.Entities;
 using PathfindingDemo.Gameplay.Enviroment;
-using PathfindingDemo.Gameplay.Util;
+using PathfindingDemo.Util;
+using PathfindingDemo.Util.Physics;
 using System.Diagnostics;
 
-namespace PathfindingDemo;
+namespace PathfindingDemo.Gameplay;
 
 internal class Display : GameBehaviour
 {

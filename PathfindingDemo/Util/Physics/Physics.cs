@@ -1,6 +1,6 @@
 ﻿using PathfindingDemo.Gameplay.Enviroment;
 
-namespace PathfindingDemo.Gameplay.Util.Physics;
+namespace PathfindingDemo.Util.Physics;
 
 internal static partial class Physics
 {

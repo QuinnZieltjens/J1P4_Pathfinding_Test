@@ -1,4 +1,4 @@
-﻿namespace PathfindingDemo;
+﻿namespace PathfindingDemo.Util;
 
 internal class TaskScheduler
 {

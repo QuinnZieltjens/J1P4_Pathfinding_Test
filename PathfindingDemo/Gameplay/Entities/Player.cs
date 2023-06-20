@@ -1,5 +1,6 @@
 ﻿using PathfindingDemo.Gameplay.Enviroment;
-using PathfindingDemo.Gameplay.Util;
+using PathfindingDemo.Util;
+using PathfindingDemo.Util.Physics;
 
 namespace PathfindingDemo.Gameplay.Entities;
 internal class Player : Entity

@@ -1,7 +1,8 @@
-﻿using PathfindingDemo.Gameplay.Enviroment;
+﻿using PathfindingDemo.Gameplay;
+using PathfindingDemo.Gameplay.Enviroment;
 using System.Diagnostics;
 
-namespace PathfindingDemo.Gameplay.Util.Physics;
+namespace PathfindingDemo.Util.Physics;
 
 
 internal class Raycast
@@ -48,16 +49,16 @@ internal class Raycast
         Position endPos = Position.Zero;
         bool usingAxisY = x1 == x2;
         bool Condition(int _n) => usingAxisY ? ConditionY(_n) : ConditionX(_n);
-        bool ConditionX(int _x) => (GetAddX() == 1) ? (_x <= x2) : (_x >= x2);
-        bool ConditionY(int _y) => (GetAddY() == 1) ? (_y <= y2) : (_y >= y2);
+        bool ConditionX(int _x) => GetAddX() == 1 ? _x <= x2 : _x >= x2;
+        bool ConditionY(int _y) => GetAddY() == 1 ? _y <= y2 : _y >= y2;
 
         int GetAdd() => usingAxisY ? GetAddY() : GetAddX();
-        int GetAddX() => (x1 > x2) ? -1 : 1;
-        int GetAddY() => (y1 > y2) ? -1 : 1;
+        int GetAddX() => x1 > x2 ? -1 : 1;
+        int GetAddY() => y1 > y2 ? -1 : 1;
 
         float Calculate(int _n) => usingAxisY ? CalculateX(_n) : CalculateY(_n);
-        float CalculateX(int _y) => (m * (_y - y1)) + x1;
-        float CalculateY(int _x) => (m * (_x - x1)) + y1;
+        float CalculateX(int _y) => m * (_y - y1) + x1;
+        float CalculateY(int _x) => m * (_x - x1) + y1;
 
         //TODO: repetition! - please fix
 

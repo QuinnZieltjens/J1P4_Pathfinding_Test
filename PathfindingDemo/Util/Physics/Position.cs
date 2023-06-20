@@ -1,4 +1,4 @@
-﻿namespace PathfindingDemo.Gameplay.Util;
+﻿namespace PathfindingDemo.Util.Physics;
 
 internal struct Position
 {

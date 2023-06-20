@@ -1,9 +1,9 @@
 ﻿using Newtonsoft.Json;
 using PathfindingDemo.Gameplay.Entities;
 using PathfindingDemo.Gameplay.Enviroment;
-using PathfindingDemo.Gameplay.Util;
+using PathfindingDemo.Util;
 
-namespace PathfindingDemo;
+namespace PathfindingDemo.Gameplay;
 
 internal class Game : GameBehaviour
 {
@@ -13,6 +13,7 @@ internal class Game : GameBehaviour
 
     private readonly World world;
     private readonly List<Entity> entities;
+    private readonly Display display;
 
     public Game()
     {

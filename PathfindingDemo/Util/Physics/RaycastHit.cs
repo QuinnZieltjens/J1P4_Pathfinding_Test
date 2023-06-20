@@ -1,4 +1,4 @@
-﻿namespace PathfindingDemo.Gameplay.Util;
+﻿namespace PathfindingDemo.Util.Physics;
 
 /// <summary>
 /// holds whether a raycast hit a wall and the position it got to (before hitting a wall if it did)
