@@ -15,15 +15,15 @@ internal abstract class GameBehaviour
 
 
         //insure that the methods only listen to the event if they haven't been declared by this class
-        if (startDeclareType != typeof(GameBehaviour))
+        if (startDeclareType != typeof(GameBehaviour)) //check for start event
             scheduler.StartEvent += Start;
 
-        if (updateDeclare != typeof(GameBehaviour))
+        if (updateDeclare != typeof(GameBehaviour)) //check for update event
             scheduler.UpdateEvent += Update;
     }
 
     /// <summary>
-    /// is called before the first frame
+    /// <inheritdoc cref="TaskScheduler.StartEvent"/>
     /// </summary>
     protected virtual void Start()
     {
@@ -31,7 +31,7 @@ internal abstract class GameBehaviour
     }
 
     /// <summary>
-    /// is called every frame
+    /// <inheritdoc cref="TaskScheduler.UpdateEvent"/>
     /// </summary>
     protected virtual void Update()
     {

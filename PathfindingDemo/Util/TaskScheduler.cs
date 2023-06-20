@@ -5,10 +5,18 @@ internal class TaskScheduler
     public static TaskScheduler? Instance { get; private set; }
 
     public bool IsRunning { get; set; }
+    private readonly Thread updateThread;
+
+    /// <summary>
+    /// is called before the first frame
+    /// </summary>
     public event Action? StartEvent;
+
+    /// <summary>
+    /// is called every frame
+    /// </summary>
     public event Action? UpdateEvent;
 
-    private readonly Thread updateThread;
 
     public TaskScheduler()
     {
@@ -22,6 +30,9 @@ internal class TaskScheduler
         Instance = this; //set the instance to this
     }
 
+    /// <summary>
+    /// invokes <see cref="StartEvent"/> and then starts the update loop
+    /// </summary>
     public void Start()
     {
         if (IsRunning)
@@ -40,7 +51,7 @@ internal class TaskScheduler
         DateTime startTime;
         DateTime endTime;
 
-        while (true) //THIS IS NOT THE BEST THING TO DO
+        while (IsRunning)
         {
             startTime = DateTime.Now;
             UpdateEvent?.Invoke();
