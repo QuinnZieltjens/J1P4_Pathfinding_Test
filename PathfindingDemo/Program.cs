@@ -1,5 +1,4 @@
-﻿using Newtonsoft.Json;
-using PathfindingDemo.Gameplay;
+﻿using PathfindingDemo.Gameplay;
 using PathfindingDemo.Util;
 
 namespace PathfindingDemo;
@@ -8,9 +7,9 @@ internal class Program
 {
     private static void Main()
     {
-        TaskScheduler taskScheduler = new();
+        GameTasks gameTasks = new();
         Game game = new();
-        taskScheduler.Start();
+        gameTasks.Start();
 
         //if the game didn't start
         if (game.GameStarted == false)

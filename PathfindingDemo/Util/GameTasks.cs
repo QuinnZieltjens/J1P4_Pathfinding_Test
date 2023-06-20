@@ -1,8 +1,10 @@
-﻿namespace PathfindingDemo.Util;
+﻿using System.Diagnostics;
 
-internal class TaskScheduler
+namespace PathfindingDemo.Util;
+
+internal class GameTasks
 {
-    public static TaskScheduler? Instance { get; private set; }
+    public static GameTasks? Instance { get; private set; }
 
     public bool IsRunning { get; set; }
     private readonly Thread updateThread;
@@ -18,13 +20,13 @@ internal class TaskScheduler
     public event Action? UpdateEvent;
 
 
-    public TaskScheduler()
+    public GameTasks()
     {
-        //make sure that a taskScheduler doesn't already exist
+        //make sure that a GameTasks doesn't already exist
         if (Instance != null)
-            throw new InvalidOperationException("an instance of TaskScheduler already exists!");
+            throw new InvalidOperationException($"an instance of {nameof(GameTasks)} already exists!");
 
-        //initialize taskScheduler object
+        //initialize Gametasts object
         updateThread = new Thread(() => UpdateLoop()); //create the update thread. Which calls UpdateLoop() via an anonymous function
         IsRunning = false; //set the game to not be running
         Instance = this; //set the instance to this
@@ -36,7 +38,7 @@ internal class TaskScheduler
     public void Start()
     {
         if (IsRunning)
-            throw new InvalidOperationException("The TaskScheduler is already running");
+            throw new InvalidOperationException($"{nameof(GameTasks)} is already running");
 
         //set IsRunning to 'true'
         IsRunning = true;
@@ -61,6 +63,9 @@ internal class TaskScheduler
 
             if (delay > 0)
                 Thread.Sleep(delay);
+
+            if (delay < 0)
+                Debug.WriteLine($"frame was buffering, took {Math.Abs(delay)}ms longer than the set framerate");
         }
     }
 

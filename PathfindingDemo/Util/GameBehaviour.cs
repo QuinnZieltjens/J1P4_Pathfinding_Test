@@ -6,8 +6,8 @@ internal abstract class GameBehaviour
 {
     public GameBehaviour()
     {
-        //get the task scheduler's instance (if instance == null, throw NullReferenceException)
-        TaskScheduler scheduler = TaskScheduler.Instance ?? throw new NullReferenceException("The TaskScheduler didn't have an instance");
+        //get the gameTask's instance (if instance == null, throw NullReferenceException)
+        GameTasks gameTasks = GameTasks.Instance ?? throw new NullReferenceException($"{nameof(GameTasks)} didn't have an instance");
 
         //get the declaring types of the methods
         Type startDeclareType = GetMethodDeclaringType(nameof(Start));
@@ -16,14 +16,14 @@ internal abstract class GameBehaviour
 
         //insure that the methods only listen to the event if they haven't been declared by this class
         if (startDeclareType != typeof(GameBehaviour)) //check for start event
-            scheduler.StartEvent += Start;
+            gameTasks.StartEvent += Start;
 
         if (updateDeclare != typeof(GameBehaviour)) //check for update event
-            scheduler.UpdateEvent += Update;
+            gameTasks.UpdateEvent += Update;
     }
 
     /// <summary>
-    /// <inheritdoc cref="TaskScheduler.StartEvent"/>
+    /// <inheritdoc cref="GameTasks.StartEvent"/>
     /// </summary>
     protected virtual void Start()
     {
@@ -31,7 +31,7 @@ internal abstract class GameBehaviour
     }
 
     /// <summary>
-    /// <inheritdoc cref="TaskScheduler.UpdateEvent"/>
+    /// <inheritdoc cref="GameTasks.UpdateEvent"/>
     /// </summary>
     protected virtual void Update()
     {
