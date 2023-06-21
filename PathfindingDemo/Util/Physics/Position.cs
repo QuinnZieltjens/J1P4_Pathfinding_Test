@@ -43,4 +43,6 @@ internal struct Position
     public static Position operator *(Position _a, Position _b) => new(_a.X * _b.X, _a.Y * _b.Y);
     public static Position operator /(Position _a, Position _b) => new(_a.X / _b.X, _a.Y / _b.Y);
     public static Position operator *(Position _a, int _b) => new(_a.X * _b, _a.Y * _b);
+    public static bool operator ==(Position _a, Position _b) => (_a.X == _b.X) && (_a.Y == _b.Y);
+    public static bool operator !=(Position _a, Position _b) => (_a.X != _b.X) && (_a.Y != _b.Y);
 }
