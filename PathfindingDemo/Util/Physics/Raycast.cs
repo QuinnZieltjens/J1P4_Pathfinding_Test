@@ -34,6 +34,7 @@ internal class Raycast
             m = (y2 - y1) / (x2 - x1); //calculate the slope
     }
 
+    //in my use case it is easier to just have a ray drawn between two points instead of an actual raycast to prevent having to do vector math for a length
     public RaycastHit DrawRay()
     {
         //if the end and start positions are equal
@@ -41,39 +42,45 @@ internal class Raycast
             return new RaycastHit(); //the raycast didn't hit anything
 
         //return a raycastHit
-        return RunRaycast();
+        return RunRaydraw();
     }
 
-    private RaycastHit RunRaycast()
+    //TODO: repetition! - please fix
+    //21-06-2023: decided not to fix this due to lack of time
+    private RaycastHit RunRaydraw()
     {
-        Position endPos = Position.Zero;
-        bool usingAxisY = x1 == x2;
-        bool Condition(int _n) => usingAxisY ? ConditionY(_n) : ConditionX(_n);
-        bool ConditionX(int _x) => GetAddX() == 1 ? _x <= x2 : _x >= x2;
-        bool ConditionY(int _y) => GetAddY() == 1 ? _y <= y2 : _y >= y2;
+        Position endPos = Position.Zero; //the position where the ray ended
+        bool usingAxisY = x1 == x2; //whether we are using the Y axis
 
-        int GetAdd() => usingAxisY ? GetAddY() : GetAddX();
-        int GetAddX() => x1 > x2 ? -1 : 1;
-        int GetAddY() => y1 > y2 ? -1 : 1;
+        bool Condition(int _n) => usingAxisY ? ConditionY(_n) : ConditionX(_n); //calls the correct local func for the condition
+        bool ConditionX(int _x) => GetAddX() == 1 ? _x <= x2 : _x >= x2; //gets the condition for the X axis
+        bool ConditionY(int _y) => GetAddY() == 1 ? _y <= y2 : _y >= y2; //gets the condition for the Y axis
 
-        float Calculate(int _n) => usingAxisY ? CalculateX(_n) : CalculateY(_n);
-        float CalculateX(int _y) => m * (_y - y1) + x1;
-        float CalculateY(int _x) => m * (_x - x1) + y1;
+        int GetAdd() => usingAxisY ? GetAddY() : GetAddX(); //calls the correct local func depending on which axis is looped through
+        int GetAddX() => x1 > x2 ? -1 : 1; //gets what to add if looping through the X axis
+        int GetAddY() => y1 > y2 ? -1 : 1; //gets what to add if looping through the Y axis
 
-        //TODO: repetition! - please fix
+        float Calculate(int _n) => usingAxisY ? CalculateX(_n) : CalculateY(_n); //decides the correct method to use
+        float CalculateX(int _y) => (m * (_y - y1)) + x1; //calculates X using the Y axis
+        float CalculateY(int _x) => (m * (_x - x1)) + y1; //calculates Y using the X axis
+
 
         if (usingAxisY)
         {
+            //loop through the Y axis
             for (int y = y1; Condition(y); y += GetAdd())
             {
-                int x = (int)Math.Round(Calculate(y));
-                Position currentPos = new(x, y);
+                int x = (int)Math.Round(Calculate(y)); //calculate X
+                Position currentPos = new(x, y); //get the current position
 
+                //mark in debug mode
                 Display.DebugMark(x, y, ConsoleColor.Red);
 
+                //if the current position is a wall
                 if (world.IsWall(currentPos))
-                    return new RaycastHit(true, endPos);
+                    return new RaycastHit(true, endPos); //say we hit something
 
+                //otherwise, set the end position to the current position
                 endPos = currentPos;
             }
         }

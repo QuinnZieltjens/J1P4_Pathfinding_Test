@@ -16,6 +16,7 @@ internal static class Input
         if (keyPressed == false)
             return false;
 
+        //if the key has been pressed before
         if (keypresses.ContainsKey(_key))
         {
             bool timeout; //whether the key is timed out
@@ -35,6 +36,7 @@ internal static class Input
 
             return false;
         }
+        //the key hasn't been pressed before
 
         //add when the key and when it was pressed
         keypresses.Add(_key, DateTime.Now);

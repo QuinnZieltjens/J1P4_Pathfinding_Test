@@ -53,17 +53,21 @@ internal class GameTasks
         DateTime startTime;
         DateTime endTime;
 
+        //whilst the game is running
         while (IsRunning)
         {
             startTime = DateTime.Now;
             UpdateEvent?.Invoke();
             endTime = DateTime.Now;
 
+            //calculate the delay that still needs to be waited
             int delay = DelayMilliseconds - (endTime - startTime).Milliseconds;
 
+            //if the delay is greater than 0
             if (delay > 0)
-                Thread.Sleep(delay);
+                Thread.Sleep(delay); //wait for the delay
 
+            //if the delay is less than 0
             if (delay < 0)
                 Debug.WriteLine($"frame was buffering, took {Math.Abs(delay)}ms longer than the set framerate");
         }
