@@ -12,7 +12,6 @@ internal class Game : GameBehaviour
     public bool GameStarted { get; private set; }
 
     private readonly World world;
-    private readonly List<Entity> entities;
     private readonly Display display;
 
     public Game()
@@ -21,14 +20,14 @@ internal class Game : GameBehaviour
         WorldBuilder worldBuilder = JsonConvert.DeserializeObject<WorldBuilder>(jsonData) ?? throw new Exception("incorrect json format!");
 
         world = worldBuilder.Build();
-        entities = new List<Entity>();
-        display = new Display(world, entities);
+        display = new Display(world);
     }
 
     protected override void Start()
     {
-        entities.Add(new Player(world, new(4, 3)));
-        entities.Add(new AStar(world, new(0, 0), new(world.SizeX - 1, world.SizeY - 1)));
+        //add the entities to the world
+        world.AddEntity(new Player(world, new(4, 3)));
+        world.AddEntity(new AStar(world, new(0, 0), new(world.SizeX - 1, world.SizeY - 1)));
 
         GameStarted = true;
     }

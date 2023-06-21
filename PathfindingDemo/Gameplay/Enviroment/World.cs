@@ -40,7 +40,6 @@ internal class World
         entities = new List<Entity>();
     }
 
-
     public void AddEntity(Entity _entity)
     {
         entities.Add(_entity);

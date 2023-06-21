@@ -12,16 +12,16 @@ internal class Display : GameBehaviour
     private const int OffsetY = 3; //set's the offset in the Y axis that the world is drawn
 
     private readonly World world;                               //contains the world that is drawn
-    private readonly List<Entity> entities;                     //contains the entities that are contained in the world
+    private readonly IReadOnlyCollection<Entity> entities;      //contains the entities that are contained in the world
     private readonly List<Position> drawnEntityPositionCache;   //cache for all the positions that an entity has been drawn
 
     /// <summary>
     /// displays <paramref name="_world"/> and <paramref name="_entities"/> to the console output
     /// </summary>
-    public Display(World _world, List<Entity> _entities)
+    public Display(World _world)
     {
         world = _world;
-        entities = _entities;
+        entities = world.Entities;
         drawnEntityPositionCache = new List<Position>();
     }
 
