@@ -27,7 +27,7 @@ internal class Game : GameBehaviour
     {
         //add the entities to the world
         world.AddEntity(new Player(world, new(4, 3)));
-        world.AddEntity(new AStar(world, new(0, 0), new(world.SizeX - 1, world.SizeY - 1)));
+        world.AddEntity(new AI(world, new(0, 0), new(world.SizeX - 1, world.SizeY - 1)));
 
         GameStarted = true;
     }
