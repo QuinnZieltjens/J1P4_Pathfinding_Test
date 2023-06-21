@@ -1,9 +1,9 @@
 ﻿using Newtonsoft.Json;
-using PathfindingDemo.Gameplay.Entities;
-using PathfindingDemo.Gameplay.Enviroment;
+using PathfindingDemo.Game.Entities;
+using PathfindingDemo.Game.Enviroment;
 using PathfindingDemo.Util;
 
-namespace PathfindingDemo.Gameplay;
+namespace PathfindingDemo.Game;
 
 internal class Game : GameBehaviour
 {

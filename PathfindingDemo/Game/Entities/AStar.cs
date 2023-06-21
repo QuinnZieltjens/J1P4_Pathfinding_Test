@@ -1,7 +1,7 @@
-﻿using PathfindingDemo.Gameplay.Enviroment;
+﻿using PathfindingDemo.Game.Enviroment;
 using PathfindingDemo.Util.Physics;
 
-namespace PathfindingDemo.Gameplay.Entities;
+namespace PathfindingDemo.Game.Entities;
 
 internal class AStar : Entity
 {

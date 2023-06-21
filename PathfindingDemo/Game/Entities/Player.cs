@@ -1,8 +1,8 @@
-﻿using PathfindingDemo.Gameplay.Enviroment;
+﻿using PathfindingDemo.Game.Enviroment;
 using PathfindingDemo.Util;
 using PathfindingDemo.Util.Physics;
 
-namespace PathfindingDemo.Gameplay.Entities;
+namespace PathfindingDemo.Game.Entities;
 internal class Player : Entity
 {
     public Player(World _world, Position _pos) : base(_world, _pos)

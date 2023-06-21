@@ -1,7 +1,7 @@
-﻿using PathfindingDemo.Gameplay.Entities;
+﻿using PathfindingDemo.Game.Entities;
 using PathfindingDemo.Util.Physics;
 
-namespace PathfindingDemo.Gameplay.Enviroment;
+namespace PathfindingDemo.Game.Enviroment;
 
 
 internal class World

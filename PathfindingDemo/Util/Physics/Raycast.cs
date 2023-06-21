@@ -1,5 +1,5 @@
-﻿using PathfindingDemo.Gameplay;
-using PathfindingDemo.Gameplay.Enviroment;
+﻿using PathfindingDemo.Game;
+using PathfindingDemo.Game.Enviroment;
 using System.Diagnostics;
 
 namespace PathfindingDemo.Util.Physics;

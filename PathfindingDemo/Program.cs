@@ -1,4 +1,4 @@
-﻿using PathfindingDemo.Gameplay;
+﻿using PathfindingDemo.Game;
 using PathfindingDemo.Util;
 
 namespace PathfindingDemo;
@@ -8,7 +8,7 @@ internal class Program
     private static void Main()
     {
         GameTasks gameTasks = new();
-        Game game = new();
+        Game.Game game = new();
         gameTasks.Start();
 
         //if the game didn't start

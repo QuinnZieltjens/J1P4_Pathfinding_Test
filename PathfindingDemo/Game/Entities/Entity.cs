@@ -1,8 +1,8 @@
-﻿using PathfindingDemo.Gameplay.Enviroment;
+﻿using PathfindingDemo.Game.Enviroment;
 using PathfindingDemo.Util;
 using PathfindingDemo.Util.Physics;
 
-namespace PathfindingDemo.Gameplay.Entities;
+namespace PathfindingDemo.Game.Entities;
 
 internal abstract class Entity : GameBehaviour
 {

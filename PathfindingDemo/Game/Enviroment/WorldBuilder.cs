@@ -1,4 +1,4 @@
-﻿namespace PathfindingDemo.Gameplay.Enviroment;
+﻿namespace PathfindingDemo.Game.Enviroment;
 
 internal class WorldBuilder
 {
