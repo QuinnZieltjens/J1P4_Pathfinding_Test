@@ -31,7 +31,7 @@ internal class Raycast
         if (x1 == x2 || y1 == y2) //if the x or y axis is equal
             m = 0f; //a slope of 0
         else
-            m = (y2 - y1) / (x2 - x1); //calculate the slope
+            m = (float)(y2 - y1) / (x2 - x1); //calculate the slope
     }
 
     //in my use case it is easier to just have a ray drawn between two points instead of an actual raycast to prevent having to do vector math for a length
