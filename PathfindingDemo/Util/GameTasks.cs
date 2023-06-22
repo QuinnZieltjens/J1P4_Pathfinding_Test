@@ -49,7 +49,7 @@ internal class GameTasks
 
     private void UpdateLoop()
     {
-        const int DelayMilliseconds = 500; // 1000 ÷ 40 = 25fps
+        const int DelayMilliseconds = 100; // 1000 ÷ 40 = 25fps
         DateTime startTime;
         DateTime endTime;
 

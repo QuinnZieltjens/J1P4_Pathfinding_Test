@@ -39,7 +39,7 @@ internal class Raycast
     {
         //if the end and start positions are equal
         if (x1 == x2 && y1 == y2)
-            return new RaycastHit(); //the raycast didn't hit anything
+            return new RaycastHit(false, new Position(x1, y1)); //the raycast didn't hit anything
 
         //return a raycastHit
         return RunRaydraw();
