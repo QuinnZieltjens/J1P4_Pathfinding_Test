@@ -45,4 +45,18 @@ internal struct Position
     public static Position operator *(Position _a, int _b) => new(_a.X * _b, _a.Y * _b);
     public static bool operator ==(Position _a, Position _b) => (_a.X == _b.X) && (_a.Y == _b.Y);
     public static bool operator !=(Position _a, Position _b) => (_a.X != _b.X) && (_a.Y != _b.Y);
+
+    public override int GetHashCode()
+    {
+        return HashCode.Combine(X, Y);
+    }
+
+    public override bool Equals(object? _obj)
+    {
+        //if the object is position and if the X and Y position is
+        //equal to this X and Y position, return true
+        return _obj is Position position &&
+               X == position.X &&
+               Y == position.Y;
+    }
 }

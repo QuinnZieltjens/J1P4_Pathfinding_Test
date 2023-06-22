@@ -6,6 +6,10 @@ namespace PathfindingDemo.Game.Pathfinding;
 
 internal class AStar : IPathfinding
 {
+    private List<Position> path;
+    private List<Node> open = new();
+    private List<Node> closed = new();
+
     public Position Start { get; set; }
     public Position Target { get; set; }
     public World World { get; init; }
@@ -15,24 +19,53 @@ internal class AStar : IPathfinding
         Start = _start;
         Target = _target;
         World = _world;
+
+        path = new List<Position>();
+    }
+
+    /// <returns>
+    /// the positions of the path
+    /// </returns>
+    public IReadOnlyCollection<Position> GetPathPositions()
+    {
+        //if the path has already been reconstructed, return the path
+        if (path.Count > 0)
+            return path;
+
+        Node? node = open[^1];
+        while (node != null)
+        {
+            path.Add(node.Pos); //add the position to the path
+            node = node.ParentNode; //set the current node to the parent node
+        }
+
+        //reverse the path so the first node is first
+        path.Reverse();
+
+        return path;
     }
 
     public Task Run()
     {
-        List<Node> open = new();    //
-        List<Node> closed = new();  //
-        int g = 0;                  //the cost from the start node to the current node
+        int g = 0;      //the cost from the start node to the current node
+        Node current;   //the current node
+        open.Clear();   //clear the list
+        closed.Clear(); //clear the list
+        path.Clear();   //clear the path
 
         //add start to the list
-        open.Add(new Node() {
-            Pos = Start,
-            G = 0,
-            H = GetHeuristicScore(Start)
+        open.Add(new Node()
+        {
+            Pos = Start, //set the position to the start position
+            G = 0, //set the cost to 0 as this is the start node
+            H = GetHeuristicScore(Start) //get the heuristic and set it
         });
 
+        //whilst there are nodes in the open list
         while (open.Count > 0)
         {
-            Node current = open[0];
+            //get the current node
+            current = open[0];
 
             //get the node with the smallest F-cost
             for (int i = 1; i < open.Count; i++)
@@ -41,6 +74,7 @@ internal class AStar : IPathfinding
                     current = open[i];
             }
 
+            //add the current node to the closed list and remove it from the open list
             closed.Add(current);
             open.Remove(current);
 
@@ -85,16 +119,16 @@ internal class AStar : IPathfinding
                         walkableNode.ParentNode = current;
                     }
                 }
-            }
 
-            if (Debugger.IsAttached)
-            {
-                Thread.Sleep(100);
-                Display.DebugMark(current.Pos.X, current.Pos.Y, ConsoleColor.Blue);
+                if (Debugger.IsAttached)
+                {
+                    Thread.Sleep(100);
+                    Display.DebugMark(current.Pos.X, current.Pos.Y, ConsoleColor.Blue);
+                }
             }
         }
 
-        return Task.CompletedTask;
+            return Task.CompletedTask;
     }
 
     private List<Position> GetWalkableTiles(Position _current)
