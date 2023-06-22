@@ -73,8 +73,8 @@ internal class Raycast
                 int x = (int)Math.Round(Calculate(y)); //calculate X
                 Position currentPos = new(x, y); //get the current position
 
-                //mark in debug mode
-                Display.DebugMark(x, y, ConsoleColor.Red);
+                //FOR DEBUGGING
+                //Display.DebugMark(x, y, ConsoleColor.Red);
 
                 //if the current position is a wall
                 if (world.IsWall(currentPos))
@@ -91,7 +91,8 @@ internal class Raycast
                 int y = (int)Math.Round(Calculate(x));
                 Position currentPos = new(x, y);
 
-                Display.DebugMark(x, y, ConsoleColor.Red);
+                //FOR DEBUGGING
+                //Display.DebugMark(x, y, ConsoleColor.Red);
 
                 if (world.IsWall(currentPos))
                     return new RaycastHit(true, endPos);

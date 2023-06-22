@@ -145,11 +145,12 @@ internal class AStar : IPathfinding
     {
         int h = Math.Abs(_pos.X - Target.X + _pos.Y - Target.Y);
 
-        if (Debugger.IsAttached)
-        {
-            Thread.Sleep(5);
-            Display.DebugMark(_pos.X, _pos.Y, ConsoleColor.Blue);
-        }
+        //FOR DEBUGGING
+        //if (Debugger.IsAttached)
+        //{
+        //    Thread.Sleep(5);
+        //    Display.DebugMark(_pos.X, _pos.Y, ConsoleColor.Blue);
+        //}
 
         return h;
     }

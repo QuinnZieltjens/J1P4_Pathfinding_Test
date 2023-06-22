@@ -25,6 +25,8 @@ internal class Display : GameBehaviour
         drawnEntityPositionCache = new List<Position>();
     }
 
+    //TODO: DebugNark isn't very nice to use, add a cache so it only updates in update
+
     /// <summary>
     /// marks the tile at position <paramref name="_x"/> <paramref name="_y"/> off with "<c>.</c>"<br/>
     /// with the colour <paramref name="_color"/> and the background colour <see cref="ConsoleColor.Black"/>

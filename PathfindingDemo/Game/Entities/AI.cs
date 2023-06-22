@@ -6,6 +6,7 @@ namespace PathfindingDemo.Game.Entities;
 
 internal class AI : Entity
 {
+    private bool calculatingRoute = false;
     private IPathfinding pathfinding;   //the pathfinding algorithm used by the AI
     private List<Position> walkPath;
 
@@ -25,14 +26,20 @@ internal class AI : Entity
     /// </summary>
     public void CalculateRoute()
     {
+        //if we are already calculating a route, ignore the request
+        if (calculatingRoute)
+            return;
+
         Thread pathfinderThread = new(() =>
         {
             //get the shortest path via the pathfinding algorithm
             pathfinding.Run().Wait(); //run the algorithm
 
             walkPath = pathfinding.GetPathPositions().ToList();
+            calculatingRoute = false;
         });
 
+        calculatingRoute = true;
         pathfinderThread.Start();
     }
 
