@@ -26,7 +26,7 @@ internal class GameTasks
         if (Instance != null)
             throw new InvalidOperationException($"an instance of {nameof(GameTasks)} already exists!");
 
-        //initialize Gametasts object
+        //initialize GameTasks object
         updateThread = new Thread(() => UpdateLoop()); //create the update thread. Which calls UpdateLoop() via an anonymous function
         IsRunning = false; //set the game to not be running
         Instance = this; //set the instance to this

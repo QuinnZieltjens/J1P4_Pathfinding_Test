@@ -40,10 +40,11 @@ internal abstract class GameBehaviour
 
     private Type GetMethodDeclaringType(string _methodName)
     {
-        Type instanceType = GetType(); //get the type of the current instance
-        MethodInfo? methodInfo = instanceType.GetMethod(_methodName); //get the method with the given methodName
+        Type objType = GetType(); //get the type of the current object
+
+        MethodInfo? methodInfo = objType.GetMethod(_methodName, BindingFlags.Instance | BindingFlags.NonPublic); //get the method with the given methodName
 
         //return the method's declared type, otherwise return the instance type
-        return methodInfo?.DeclaringType ?? instanceType;
+        return methodInfo?.DeclaringType ?? throw new NullReferenceException();
     }
 }
