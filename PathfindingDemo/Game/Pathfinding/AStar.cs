@@ -32,7 +32,7 @@ internal class AStar : IPathfinding
         if (path.Count > 0)
             return path;
 
-        Node? node = open[^1];
+        Node? node = closed[^1];
         while (node != null)
         {
             path.Add(node.Pos); //add the position to the path
@@ -85,9 +85,11 @@ internal class AStar : IPathfinding
             List<Position> walkableTiles = GetWalkableTiles(current.Pos); //get the walkable positions around the current position
             g++; //increment the cost by 1
 
+
             //loop through the walkable positions
             foreach (Position walkablePosition in walkableTiles)
             {
+
                 //if the node has already been calculated, ignore it
                 if (closed.FirstOrDefault(_node => _node.Pos == walkablePosition) != null)
                     continue;
@@ -119,16 +121,10 @@ internal class AStar : IPathfinding
                         walkableNode.ParentNode = current;
                     }
                 }
-
-                if (Debugger.IsAttached)
-                {
-                    Thread.Sleep(100);
-                    Display.DebugMark(current.Pos.X, current.Pos.Y, ConsoleColor.Blue);
-                }
             }
         }
 
-            return Task.CompletedTask;
+        return Task.CompletedTask;
     }
 
     private List<Position> GetWalkableTiles(Position _current)
@@ -148,6 +144,13 @@ internal class AStar : IPathfinding
     private int GetHeuristicScore(Position _pos)
     {
         int h = Math.Abs(_pos.X - Target.X + _pos.Y - Target.Y);
+
+        if (Debugger.IsAttached)
+        {
+            Thread.Sleep(5);
+            Display.DebugMark(_pos.X, _pos.Y, ConsoleColor.Blue);
+        }
+
         return h;
     }
 }
