@@ -10,5 +10,6 @@ internal interface IPathfinding
     [Required()] public Position Target { get; set; }
     [Required()] public World World { get; init; }
 
+    public IReadOnlyCollection<Position> GetPathPositions();
     public Task Run();
 }
